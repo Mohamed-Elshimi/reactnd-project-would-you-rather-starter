@@ -1,4 +1,5 @@
 import { saveQuestion } from '../utils/api';
+import { addQuestionToUser } from '../actions/users';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
