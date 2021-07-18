@@ -7,7 +7,9 @@ import Nav from './Nav';
 import SignInForm from './SignInForm';
 import Leaderboard from './Leaderboard';
 import NewQuestion from './NewQuestion';
-//import Dashboard from './Dashboard';
+import PrivateRoute from './PrivateRoute';
+import Dashboard from './Dashboard';
+import QuestionCard from './QuestionCard';
 
 class App extends Component {
 	componentDidMount() {
@@ -21,14 +23,17 @@ class App extends Component {
 					<LoadingBar />
 					<div className="container">
 						{authedUser === null ? (
-							<Route render={() => <SignInForm />} />
+							<Route to="/login" render={() => <SignInForm />} />
 						) : (
 							<Fragment>
 								<Nav />
 
 								<Switch>
-									<Route path="/add" component={NewQuestion} />
-									<Route path="/leaderboard" component={Leaderboard} />
+									<PrivateRoute exact path="/" component={Dashboard} />
+
+									<PrivateRoute path="/questions/:question_id" component={QuestionCard} />
+									<PrivateRoute path="/add" component={NewQuestion} />
+									<PrivateRoute path="/leaderboard" component={Leaderboard} />
 								</Switch>
 							</Fragment>
 						)}
